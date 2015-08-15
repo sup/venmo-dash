@@ -15,7 +15,10 @@ var userSchema = mongoose.Schema({
     salt: String,
     venmo: {},
     access_token: String,
-    refresh_token: String 
+    refresh_token: String,
+    uid: String,
+    profilePic: String,
+    dateJoined: String 
 });
 
 module.exports = mongoose.model('User', userSchema);

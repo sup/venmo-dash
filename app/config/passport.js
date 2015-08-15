@@ -42,7 +42,10 @@ module.exports = function(passport) {
                         venmo: venmo._json,
                         balance: venmo.balance,
                         access_token: accessToken,
-                        refresh_token: refreshToken
+                        refresh_token: refreshToken,
+                        uid: venmo.id,
+                        profileUrl: venmo.profile_picture_url,
+                        dataJoined: venmo.date_joined
                     });
                     user.save(function(err) {
                         if (err) console.log(err);
@@ -52,6 +55,7 @@ module.exports = function(passport) {
                     console.log("USER FOUND UPDATING");
                     user.balance = venmo.balance;
                     user.access_token = accessToken;
+                    user.uid = venmo.id;
                     user.save();
                     user.venmo = venmo._json;
                     return done(err, user);
