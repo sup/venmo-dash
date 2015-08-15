@@ -21,3 +21,7 @@ nav {
 .green-font {
 	color: #5cb85c;
 }
+
+#search {
+	margin: 0;
+}
