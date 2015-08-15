@@ -1,3 +1,24 @@
 #card-grid .card-panel .row {
   margin-bottom: 0px;
 }
+
+.avatar {
+	padding: 0 0 0 0;
+}
+
+#maincard {
+	margin-top: 1.5rem;
+}
+
+nav {
+	background-color: #3D95CE;
+}
+
+body {
+	background-image: url('../assets/graph.png');
+	background-size: cover;
+}
+
+.green-font {
+	color: #5cb85c;
+}
