@@ -40,14 +40,14 @@
             <div class="col s3 avatar">
               <img src="../assets/charles.png" alt="" class="circle responsive-img"> 
             </div>
-            <div class="col s6 info">
+            <div class="col s5 info">
               <h3 class="username">Charles Lai</h3>
               <div class="balance">Current Balance: <span class="green-font">Value</span></div>
               <div class="ratio">ratio!</div>
               <div class="graph">graph?</div>
             </div>
-            <div class="col s3">
-              <div class="graph">Payments/Loss Graph: <span class="green-font">Value</span></div>
+            <div class="col s4">
+              <div id="my-graph" class="ct-chart ct-perfect-fourth"></div>
             </div>
           </div>
         </div>
@@ -110,6 +110,21 @@
         }
       );
     });
+    </script>
+    <script>
+      var data = {
+        // A labels array that can contain any sort of values
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+          [5, 2, 4, 2, 0]
+        ]
+      };
+
+      // Create a new line chart object where as first parameter we pass in a selector
+      // that is resolving to our chart container element. The Second parameter
+      // is the actual data object.
+      new Chartist.Line('#my-graph', data);
     </script>
   </body>
 </html>
