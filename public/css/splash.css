@@ -2,6 +2,7 @@
 	background-image: url('../assets/lucasfinal.jpg');
 	height: 100vh;
 	width: 100vw;
+	background-size: cover;
 }
 
 #login {
