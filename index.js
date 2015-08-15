@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -8,6 +9,10 @@ var passport = require('passport');
 var request = require('request');
 var async = require('async');
 
+var configDB = require('./app/config/database.js');
+mongoose.connect(configDB.url);
+
+require('./app/config/passport.js')(passport);
 
 app.set('port', (process.env.PORT || 3000));
 app.use(morgan('dev'));
