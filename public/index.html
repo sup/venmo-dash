@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+    <link rel="stylesheet" href="css/chartist.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <div id="page-container" class="container">
+      <h1 id="title" class="center-align"> Venmo Dashboard </h1>
+      <!-- Main Grid/Row holding cards -->
+      <div id="card-grid" class="row">
+
+        <!-- Card Structure for Grid View -->
+        <div class="col l4 m6 s12">
+          <div class="card-panel">
+            <div class="row content">
+              <div class="col s3 avatar">
+                <img src="assets/charles.png" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+              </div>
+              <div class="col s9 info">
+                <div class="row username">Charles Lai</div>
+                <div class="row ratio">ratio!</div>
+                <!-- Modal Trigger -->
+                <a class="waves-effect waves-light modal-trigger btn light-blue lighten-3" href="#modal1">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Structure for Detailed View-->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <h4>Username</h4>
+            <p>Info about the user</p>
+            <div class="row">
+              <div class="col s4 graph">Graphs?</div>
+              <div class="col s4 graph">Graphs?</div>
+              <div class="col s4 graph">Graphs?</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Pay</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Charge</a>
+          </div>
+        </div>
+
+
+      </div>
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/chartist.min.js"></script>
+    <!-- Put this somewhere for basic models -->
+    <script type="text/javascript">  
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal({
+          dismissible: true, // Modal can be dismissed by clicking outside of the modal
+          opacity: .5, // Opacity of modal background
+          in_duration: 300, // Transition in duration
+          out_duration: 200, // Transition out duration
+          ready: function() {}, // Callback for Modal open
+          complete: function() {} // Callback for Modal close
+        }
+      );
+    });
+    </script>
+  </body>
+</html>
+      
