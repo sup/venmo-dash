@@ -22,15 +22,18 @@ module.exports = function(passport) {
     passport.use(new VenmoStrategy({
         clientID: VENMO_CLIENT_ID,
         clientSecret: VENMO_CLIENT_SECRET,
-        callbackURL: "localhost:3000/auth/venmo/callback"
+        callbackURL: "http://76f094b1.ngrok.com/auth/venmo/callback"
         }, function(accessToken, refreshToken, venmo, done) {
-            Users.findOne({
+            console.log("Trying to find User");
+            User.findOne({
                 'venmo.id': venmo.id
             }, function(err, user) {
                 if (err) {
+                    console.log("error");
                     return done(err);
                 }
                 if(!user) {
+                    console.log("USER NOT FOUND");
                     user = new User({
                         name: venmo.displayName,
                         username: venmo.username,
@@ -41,7 +44,12 @@ module.exports = function(passport) {
                         access_token: accessToken,
                         refresh_token: refreshToken
                     });
+                    user.save(function(err) {
+                        if (err) console.log(err);
+                        return done(err, user);
+                    });
                 } else {
+                    console.log("USER FOUND UPDATING");
                     user.balance = venmo.balance;
                     user.access_token = accessToken;
                     user.save();
