@@ -74,6 +74,35 @@ module.exports = function(app, request, async, passport, cron) {
         }
     });
 
+    app.post('/recurrence', isLoggedIn, function(req, res) {
+        var body = req.body;
+        console.log("PAYMENT BODY="+JSON.stringify(req.body));
+        var user_id = body.user_id;
+        var note = body.note;
+        var amount= body.amount;
+        var date = body.date;
+        var time = body.time; //assume time in hh:mm:ss
+        var social = body.social ? 'public' : 'private';
+
+        if (!date) {
+            pay(req.user.access_token, user_id, note, amount, social);
+            res.status(200).send('{}');
+        } else {
+            // Parse date to create date object
+            var datearr = date.split("-");
+            var timearr = time.split(":");
+            var rule = new cron.RecurrenceRule();
+            rule.month = int(timearr[1])-1;
+            rule.hour = int(timearr[0]);
+            rule.minute = int(timearr[1]);
+            rule.second = int(timearr[2]);
+            cron.scheduleJob(dateobj, function(){
+                pay(req.user.access_token, user_id, note, amount, social);
+            });
+            res.status(200).send('{}');
+        }
+    });
+
     function pay(userToken, user_id, note, amount, social) {
         var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&user_id='+user_id+'&note='+note+'&amount='+amount+'&audience='+social; 
 
