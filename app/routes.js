@@ -39,7 +39,7 @@ module.exports = function(app, request, async, passport) {
 
     app.get('/profile', isLoggedIn, function(req, res) {
         console.log("profile route hit");
-        payHistory(req.user.access_token, function(error, data) {
+        payHistory(req.user.access_token, req.user.username, function(error, data) {
             var user = req.user;
             var profileData = {
                 profile: user,
@@ -87,7 +87,7 @@ module.exports = function(app, request, async, passport) {
 
     };
 
-    function payHistory(userToken, callback) {
+    function payHistory(userToken, username, callback) {
         var venmoUrl ='https://api.venmo.com/v1/payments?access_token='+userToken+'&limit=1000';
         var options = {
             url: venmoUrl
@@ -100,14 +100,26 @@ module.exports = function(app, request, async, passport) {
         request.get(options, function(error, response, body) {
             if (!error) {
                 var bodyData = JSON.parse(body);
-                console.log(bodyData.data);
                 console.log("BODY COUNT="+bodyData.data.count);
                 for(var i in bodyData.data) {
-                    if (bodyData.data[i].action == "pay") {
-                        payed += bodyData.data[i].amount;
-                    } else if (bodyData.data[i].action =="charge") {
-                        charged += bodyData.data[i].amount;
-                    } 
+                    if(bodyData.data[i].status === "settled" || bodyData.data[i].status === "pending") {
+                        if (bodyData.data[i].status === "pending") {
+                            console.log(bodyData.data[i]);
+                        }
+                        if (bodyData.data[i].action === "pay") {
+                            if (bodyData.data[i].actor.username != username) {
+                                charged += bodyData.data[i].amount;
+                            } else {
+                                payed += bodyData.data[i].amount;
+                            }
+                        } else if (bodyData.data[i].action === "charge") {
+                            if (bodyData.data[i].actor.username != username) {
+                                payed += bodyData.data[i].amount;
+                            } else {
+                                charged += bodyData.data[i].amount;
+                            }
+                        } 
+                    }
                 }
                 var results = {
                     charged: charged,
