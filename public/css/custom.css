@@ -2,6 +2,14 @@ body {
     background-image: url('../assets/graph.png');
 }
 
+#pay {
+  margin-left: 75%;
+}
+
+.username {
+  margin-top: 0px;
+}
+
 #card-grid .card-panel .row {
   margin-bottom: 0px;
 }
