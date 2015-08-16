@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     var MainView = Backbone.View.extend({
 
-        el: $('#page-container'),
+        el: $('#main-view-anchor'),
 
         template: '<div id="maincard" class="col s12"> <div class="card-panel"> <div class="row content"> <div class="col s3 avatar-div"> <img src="{{profile.venmo.profile_picture_url}}" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{profile.venmo.display_name}}</h3> <div class="email">{{profile.email}}</div> <div class="balance">Current Balance: <span class="green-font">{{profile.balance}}</span></div> <div class="graph">graph?</div> </div> <div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
 
