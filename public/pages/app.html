@@ -182,7 +182,7 @@
               type: 'POST',
               dataType: 'json',
               contentType: "application/json",
-              data: {
+              data: JSON.stringify({
                 username: username,
                 message: message,
                 amount: amount,
@@ -190,7 +190,7 @@
                 social: social,
                 pay: true,
                 charge: false
-              },
+              }),
             })
             .done(function() {
               console.log("success");
@@ -212,7 +212,7 @@
               type: 'POST',
               dataType: 'json',
               contentType: "application/json",
-              data: {
+              data: JSON.stringify({
                 username: username,
                 message: message,
                 amount: amount,
@@ -220,7 +220,7 @@
                 social: social,
                 pay: false,
                 charge: true
-              },
+              }),
             })
             .done(function() {
               console.log("success");
