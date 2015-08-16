@@ -126,13 +126,21 @@
                     <input type="date" class="datepicker">
                   </div>
                 </div>
+                <div class="switch">
+                  <label>
+                    Private
+                    <input type="checkbox">
+                    <span class="lever"></span>
+                    Public
+                  </label>
+                </div>
               </form>
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-light grey lighten-3 btn-flat">Exit</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-light deep-orange lighten-3 btn-flat">Pay</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-light light-green lighten-3 btn-flat">Charge</a>
+            <a id="exit" class=" modal-action modal-close waves-effect waves-light grey lighten-3 btn-flat">Exit</a>
+            <a id="pay" class=" waves-effect waves-light deep-orange lighten-2 btn-flat">Pay</a>
+            <a id="charge" class=" waves-effect waves-light light-green lighten-2 btn-flat">Charge</a>
           </div>
         </div>
 
@@ -143,19 +151,29 @@
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/chartist.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <!-- Put this somewhere for basic modal -->
+    
+    <!-- Form Handling for Payments and Modal -->
     <script type="text/javascript">  
-    $(document).ready(function(){
-        $('.modal-trigger').leanModal({
-          dismissible: true, // Modal can be dismissed by clicking outside of the modal
-          opacity: .5, // Opacity of modal background
-          in_duration: 300, // Transition in duration
-          out_duration: 200, // Transition out duration
-          ready: function() {}, // Callback for Modal open
-          complete: function() {} // Callback for Modal close
-        }
-      );
-    });
+      $(document).ready(function(){
+
+          $('.modal-trigger').leanModal({
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
+            opacity: .5, // Opacity of modal background
+            in_duration: 300, // Transition in duration
+            out_duration: 200, // Transition out duration
+            ready: function() {}, // Callback for Modal open
+            complete: function() {} // Callback for Modal close
+          });
+          // Pay button clicked
+          $('#pay').click(function(event) {
+            
+          });
+
+          // Charge button clicked
+          $('#charge').click(function(event) {
+            
+          });
+      });
     </script>
   </body>
 </html>
