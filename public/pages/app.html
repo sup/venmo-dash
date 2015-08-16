@@ -275,6 +275,7 @@
             var amount = $("#amount").val();
             var date = $("#date").val();
             var social = $("#social").is(":checked");
+            var time = $("#time").val();
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -285,6 +286,7 @@
                 note: note,
                 amount: amount,
                 date: date,
+                time: time,
                 social: social
               }),
             })
@@ -306,6 +308,7 @@
             var amount = $("#amount").val();
             var date = $("#date").val();
             var social = $("#social").is(":checked");
+            var time = $("#time").val();
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -316,6 +319,7 @@
                 note: note,
                 amount: -amount,
                 date: date,
+                time: time,
                 social: social
               }),
             })
@@ -336,6 +340,7 @@
             var amount = $("#amount2").val();
             var date = $("#date2").val();
             var social = $("#social2").is(":checked");
+            var time = $("#time2").val();
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -346,6 +351,7 @@
                 note: note,
                 amount: amount,
                 date: date,
+                time: time,
                 social: social
               }),
             })
@@ -367,6 +373,7 @@
             var amount = $("#amount2").val();
             var date = $("#date2").val();
             var social = $("#social2").is(":checked");
+            var time = $("#time2").val();
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -377,6 +384,7 @@
                 note: note,
                 amount: -amount,
                 date: date,
+                time: time,
                 social: social
               }),
             })
