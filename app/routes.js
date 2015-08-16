@@ -56,6 +56,7 @@ module.exports = function(app, request, async, passport, cron) {
         var note = body.note; 
         var amount= body.amount;
         var date = body.date;
+        var time = body.time; //assume time in hh:mm:ss
         var social = body.social ? 'public' : 'private';
 
         if (!date) {
@@ -64,7 +65,8 @@ module.exports = function(app, request, async, passport, cron) {
         } else {  
             // Parse date to create date object
             var datearr = date.split("-");
-            var dateobj = new Date(datearr[0], datearr[1], datearr[2], 00, 00, 00);
+            var timearr = time.split(":");
+            var dateobj = new Date(datearr[0], datearr[1], datearr[2], timearr[0], timearr[1], timearr[2]);
             cron.scheduleJob(dateobj, function(){
                 pay(req.user.access_token, user_id, note, amount, social); 
             });
