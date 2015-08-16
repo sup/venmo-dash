@@ -44,8 +44,8 @@
       <div id="maincard" class="col s12">
         <div class="card-panel">
           <div class="row content">
-            <div class="col s3 avatar">
-              <img src="../assets/charles.png" alt="" class="circle responsive-img"> 
+            <div class="col s3 avatar-div">
+              <img src="../assets/charles.png" alt="" class="avatar responsive-img"> 
             </div>
             <div class="col s5 info">
               <h3 class="username">Charles Lai</h3>
@@ -63,17 +63,24 @@
       <!-- Main Grid/Row holding friend cards -->
       <div id="card-grid" class="row">
 
-        <!-- Card Structure for Grid View 
+        <!-- Card Structure for Grid View -->
         <div class="col l4 m6 s12">
           <div class="card-panel">
             <div class="row content">
-              <div class="col s3 avatar">
-                <img src="../assets/charles.png" alt="" class="circle responsive-img">
+              <div class="col s3 avatar-div">
+                <img src="../assets/charles.png" alt="" class="avatar responsive-img">
               </div>
               <div class="col s9 info">
                 <div class="username">Charles Lai</div>
                 <div class="ratio">ratio!</div>
-
+                <div class="progress">
+                  <div class="progress-bar progress-bar-success" style="width: 90%">
+                    <span class="sr-only">$90</span>
+                  </div>
+                  <div class="progress-bar progress-bar-danger" style="width: 10%">
+                    <span class="sr-only">$10</span>
+                  </div>
+                </div>
                 <a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a>
               </div>
             </div>
@@ -95,7 +102,7 @@
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Pay</a>
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Charge</a>
           </div>
-          </div>-->
+          </div>
 
 
       </div>
@@ -104,6 +111,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <script type="text/javascript" src="../js/chartist.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <!-- Put this somewhere for basic modal -->
     <script type="text/javascript">  
     $(document).ready(function(){
@@ -124,7 +132,7 @@
         labels: ["Money Paid", "Money Received"],
       }, {
         donut: true,
-        donutWidth: 20,
+        donutWidth: 35,
       });
     </script>
   </body>
