@@ -41,7 +41,7 @@ $(document).ready(function() {
             var graph_data = this.model.toJSON().graph;
             new Chartist.Pie('.ct-chart', {
             series: [graph_data.payed, graph_data.charged],
-            labels: ["Money Paid", "Money Received"],
+            labels: ["$"+graph_data.payed, "$"+graph_data.charged],
             }, {
                 donut: true,
                 donutWidth: 35,
