@@ -191,6 +191,9 @@
                 charge: false
               },
             })
+            .done(function() {
+              console.log("success");
+            })
             .fail(function() {
               console.log("error");
             })
@@ -216,6 +219,9 @@
                 pay: false,
                 charge: true
               },
+            })
+            .done(function() {
+              console.log("success");
             })
             .fail(function() {
               console.log("error");
