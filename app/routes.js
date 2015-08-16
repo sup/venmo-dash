@@ -60,12 +60,12 @@ module.exports = function(app, request, async, passport, cron) {
 
         if (!date) {
             pay(req.user.access_token, user_id, note, amount, social);  
-            res.status(200).send('OK');
+            res.status(200).send('{}');
         } else {  
             cron.scheduleJob(date, function(){
                 pay(req.user.access_token, user_id, note, amount, social); 
             });
-            res.status(200).send('OK');
+            res.status(200).send('{}');
         }
     });
 
