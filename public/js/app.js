@@ -30,6 +30,32 @@ $(document).ready(function() {
 
     });
 
+    var MainView = Backbone.View.extend({
+
+        el: $('#page-container'),
+
+        template: '<div id="maincard" class="col s12"> <div class="card-panel"> <div class="row content"> <div class="col s3 avatar-div"> <img src="{{user.profile_picture_url}}" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{user.display_name}}</h3> <div class="email">{{user.email}}</div> <div class="balance">Current Balance: <span class="green-font">{{user.balance}}</span></div> <div class="graph">graph?</div> </div> <div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
+
+        initialize: function() {
+            this.render();
+        },
+
+        render: function() {
+            // TODO MAKE THIS.MODEL.TOJSON()
+            this.$el.append((Mustache.render(this.template, this.model.toJSON())));
+            var graph_data = this.model.toJSON().graph;
+            new Chartist.Pie('.ct-chart', {
+            series: [50,50],
+            labels: ["Money Paid", "Money Received"],
+            }, {
+                donut: true,
+                donutWidth: 35,
+            });
+            return this;
+        },
+
+    });
+
     ProfileCollection = Backbone.Collection.extend({
         comparator: function(model) {
             // based on highest paid
@@ -72,7 +98,8 @@ $(document).ready(function() {
     })
     .done(function(body) {
         console.log("BEFORE THE BODY");
-        //console.log("HERE IS THE BODY" + body);
+        var MainCardView = new MainView({model: body});
+        // Update graph with graph data
         console.log(body);
     })
     .fail(function() {
