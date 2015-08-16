@@ -98,7 +98,8 @@ $(document).ready(function() {
     })
     .done(function(body) {
         console.log("BEFORE THE BODY");
-        var MainCardView = new MainView({model: body});
+        var MainCard = new ProfileCard(body);
+        var MainCardView = new MainView({model: MainCard});
         // Update graph with graph data
         console.log(body);
     })
