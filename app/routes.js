@@ -32,14 +32,24 @@ module.exports = function(app, request, async, passport) {
 
     app.get('/friends', isLoggedIn, function(req, res) {
         getFriendsList(req.user.uid, req.user.access_token, function(error, resData) {
-            console.log("RES DATA= "+resData);
+            console.log("RES DATA= "  +resData);
             res.send(resData);
         });
     });
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        res.send(req.user);
+        console.log("profile route hit");
+        payHistory(req.user.access_token, function(error, data) {
+            var user = req.user;
+            var profileData = {
+                profile: user,
+                graph: data
+            };
+            console.log("User profile returning "+profileData);
+            res.send(profileData);
+        });
     });
+
 
     function getFriendsList(userId, userToken, callback) {
         var venmoUrl = 'https://api.venmo.com/v1/users/'+userId+'/friends?access_token='+userToken+'&limit=300'; 
@@ -55,6 +65,55 @@ module.exports = function(app, request, async, passport) {
                 var bodyData = JSON.parse(body);
                 console.log("WE AMDE IT TO THE REQ "+bodyData);
                 callback(error, bodyData);
+            }
+        });
+    };
+
+    function paymentFriendsList(userToken, friendsList, callback) {
+        var venmoUrl ='https://api.venmo.com/v1/payments?access_token='+userToken;
+        var options = {
+            url: venmoUrl
+        };
+        request.get(options, function(error, response, body) {
+            if(!error) {
+                var bodyData = JSON.parse(body);
+                for(var i in bodyData) {
+                    for (var z in bodyData) {
+
+                    }
+                }
+            }
+        });
+
+    };
+
+    function payHistory(userToken, callback) {
+        var venmoUrl ='https://api.venmo.com/v1/payments?access_token='+userToken+'&limit=1000';
+        var options = {
+            url: venmoUrl
+        };
+        var charged = 0;
+        var payed = 0;
+        
+        console.log("URL: "+venmoUrl);
+        console.log("Before request to payment"); 
+        request.get(options, function(error, response, body) {
+            if (!error) {
+                var bodyData = JSON.parse(body);
+                console.log(bodyData.data);
+                console.log("BODY COUNT="+bodyData.data.count);
+                for(var i in bodyData.data) {
+                    if (bodyData.data[i].action == "pay") {
+                        payed += bodyData.data[i].amount;
+                    } else if (bodyData.data[i].action =="charge") {
+                        charged += bodyData.data[i].amount;
+                    } 
+                }
+                var results = {
+                    charged: charged,
+                    payed: payed
+                };
+                callback(error, results);
             }
         });
     };

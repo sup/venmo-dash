@@ -43,12 +43,11 @@ $(document).ready(function() {
 
         render: function() {
             this.collection.forEach(function(item) {
-                console.log(item);
                 var view = new ProfileView({model: item});
             });
         }
     });
-
+/*
     $.ajax({
         type: "GET",
         url: "/friends"
@@ -65,6 +64,19 @@ $(document).ready(function() {
     })
     .fail(function() {
         console.log("FAILED");
+    });*/
+    console.log("BEFORE REQUEST");
+    $.ajax({
+        type: "GET",
+        url: "/profile"
+    })
+    .done(function(body) {
+        console.log("BEFORE THE BODY");
+        //console.log("HERE IS THE BODY" + body);
+        console.log(body);
+    })
+    .fail(function() {
+        console.log("PROFILE FAILED");
     });
 
 
