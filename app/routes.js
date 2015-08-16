@@ -51,35 +51,36 @@ module.exports = function(app, request, async, passport, cron) {
 
     app.post('/payment', isLoggedIn, function(req, res) {
         var body = req.body;
-        console.log("PAYMENT BODY="+req.body);
-        var username = body.username;
-        var message = body.message; 
+        console.log("PAYMENT BODY="+JSON.stringify(req.body));
+        var email = body.email;
+        var note = body.note; 
         var amount= body.amount;
         var date = body.date;
-        var social = body.social;
+        var social = body.social ? 'public' : 'private';
 
         if (!date) {
-            pay(req.user.access_token, username, message, amount, social);  
+            pay(req.user.access_token, email, note, amount, social);  
             res.status(200);
-        }     
-       
-        cron.scheduleJob(date, function(){
-            pay(req.user.access_token, username, message, amount, social); 
-            res.status(200); 
-        }); 
-
+        } else {  
+            cron.scheduleJob(date, function(){
+                pay(req.user.access_token, email, note, amount, social); 
+                res.status(200); 
+            }); 
+        }
     });
 
-    function pay(userToken, userId, message, amount, social) {
-        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'userId='+userId+'&message='+message+'&amount='+amount+'&audience='+social; 
+    function pay(userToken, email, note, amount, social) {
+        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&email='+email+'&note='+note+'&amount='+amount+'&audience='+social; 
 
         var options = {
             url: venmoUrl
         };
         console.log("Payment URL "+venmoUrl);
-        request.get(options, function(error, response, body) {
+        request.post(options, function(error, response, body) {
             if (!error) {
-                console.log("PAYMENT"+body);
+                console.log(response);
+                console.log("PAYMENT CREATED");
+                console.log(body);
             };
         });
     };
@@ -95,7 +96,7 @@ module.exports = function(app, request, async, passport, cron) {
         
         request.get(options, function(error, response, body) {
             if (!error) {
-                console.log("BODY= "+body);
+                //console.log("BODY= "+body);
                 var bodyData = JSON.parse(body);
                 console.log("WE AMDE IT TO THE REQ "+bodyData);
                 callback(error, bodyData);

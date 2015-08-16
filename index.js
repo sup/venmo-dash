@@ -8,6 +8,7 @@ var session = require('express-session');
 var passport = require('passport');
 var request = require('request');
 var async = require('async');
+var cron = require('node-schedule');
 
 var configDB = require('./app/config/database.js');
 mongoose.connect(configDB.url);
@@ -28,7 +29,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./app/routes.js')(app, request, async, passport);
+require('./app/routes.js')(app, request, async, passport, cron);
 
 app.listen(app.get('port'), function() {
     console.log("listening on port: "+app.get('port'));
