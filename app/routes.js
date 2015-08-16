@@ -70,7 +70,7 @@ module.exports = function(app, request, async, passport, cron) {
     });
 
     function pay(userToken, user_id, note, amount, social) {
-        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&email='+user_id+'&note='+note+'&amount='+amount+'&audience='+social; 
+        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&user_id='+user_id+'&note='+note+'&amount='+amount+'&audience='+social; 
 
         var options = {
             url: venmoUrl
