@@ -15,7 +15,6 @@ $(document).ready(function() {
         },
 
         render: function() {
-            // TODO MAKE THIS.MODEL.TOJSON()
             this.$el.append((Mustache.render(this.template, this.model.toJSON())));
             return this;
         },
@@ -34,13 +33,14 @@ $(document).ready(function() {
 
         el: $('#page-container'),
 
-        template: '<div id="maincard" class="col s12"> <div class="card-panel"> <div class="row content"> <div class="col s3 avatar-div"> <img src="{{user.profile_picture_url}}" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{user.display_name}}</h3> <div class="email">{{user.email}}</div> <div class="balance">Current Balance: <span class="green-font">{{user.balance}}</span></div> <div class="graph">graph?</div> </div> <div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
+        template: '<div id="maincard" class="col s12"> <div class="card-panel"> <div class="row content"> <div class="col s3 avatar-div"> <img src="{{profile.venmo.profile_picture_url}}" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{profile.venmo.display_name}}</h3> <div class="email">{{profile.email}}</div> <div class="balance">Current Balance: <span class="green-font">{{profile.balance}}</span></div> <div class="graph">graph?</div> </div> <div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
 
         initialize: function() {
+            console.log(this.model);
             this.render();
             var graph_data = this.model.toJSON().graph;
             new Chartist.Pie('.ct-chart', {
-            series: [graph_data.pay,graph_data.charged],
+            series: [graph_data.payed, graph_data.charged],
             labels: ["Money Paid", "Money Received"],
             }, {
                 donut: true,
@@ -51,7 +51,7 @@ $(document).ready(function() {
         render: function() {
             // TODO MAKE THIS.MODEL.TOJSON()
             this.$el.append((Mustache.render(this.template, this.model.toJSON())));
-            var graph_data = this.model.toJSON().graph;
+            //var graph_data = this.model.toJSON().graph;
             return this;
         },
 
@@ -74,7 +74,23 @@ $(document).ready(function() {
             });
         }
     });
-/*
+
+
+    $.ajax({
+        type: "GET",
+        url: "/profile"
+    })
+    .done(function(body) {
+        console.log("BEFORE THE BODY");
+        var MainCard = new ProfileCard(body);
+        var MainCardView = new MainView({model: MainCard});
+        // Update graph with graph data
+        console.log(body);
+    })
+    .fail(function() {
+        console.log("PROFILE FAILED");
+    });
+
     $.ajax({
         type: "GET",
         url: "/friends"
@@ -91,22 +107,6 @@ $(document).ready(function() {
     })
     .fail(function() {
         console.log("FAILED");
-    });*/
-    console.log("BEFORE REQUEST");
-    $.ajax({
-        type: "GET",
-        url: "/profile"
-    })
-    .done(function(body) {
-        console.log("BEFORE THE BODY");
-        var MainCard = new ProfileCard(body);
-        var MainCardView = new MainView({model: MainCard});
-        // Update graph with graph data
-        console.log(body);
-    })
-    .fail(function() {
-        console.log("PROFILE FAILED");
     });
-
 
 });
