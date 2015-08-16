@@ -187,9 +187,7 @@
                 message: message,
                 amount: amount,
                 date: date,
-                social: social,
-                pay: true,
-                charge: false
+                social: social
               }),
             })
             .done(function() {
@@ -215,11 +213,9 @@
               data: JSON.stringify({
                 username: username,
                 message: message,
-                amount: amount,
+                amount: -amount,
                 date: date,
-                social: social,
-                pay: false,
-                charge: true
+                social: social
               }),
             })
             .done(function() {
