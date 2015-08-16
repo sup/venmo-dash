@@ -114,45 +114,45 @@
         <li>
           <div class="collapsible-header"><i class="material-icons">replay</i>Recurring Payments and Charges</div>
           <div class="collapsible-body">
-            <div id="form-row" class="row">
-              <div id="form-col" class="col s12">
+            <div id="form-row2" class="row">
+              <div id="form-col2" class="col s12">
                 <div class="card-panel">
                   <h5>Recurring Payment/Charge</h5>
                   <div class="row">
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s3">
-                          <input id="user_id" type="text" class="validate">
-                          <label for="user_id">User ID</label>
+                          <input id="user_id2" type="text" class="validate">
+                          <label for="user_id2">User ID</label>
                         </div>
                         <div class="input-field col s3">
-                          <input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" />
-                          <label for="amount">Amount</label>
+                          <input id="amount2" type="number" min="0.01" step="0.01" max="2500" value="" />
+                          <label for="amount2">Amount</label>
                         </div>
                         <div class="input-field col s3">
-                          <input id="date" type="date" class="datepicker">
+                          <input id="date2" type="date" class="datepicker">
                         </div>
                         <div class="input-field col s3">
-                          <input id="time" type="text">
-                          <label for="time">Time</label>
+                          <input id="time2" type="text">
+                          <label for="time2">Time</label>
                         </div>
                         <div class="input-field col s12">
-                          <input id="note" type="text" class="validate">
-                          <label for="note">Note</label>
+                          <input id="note2" type="text" class="validate">
+                          <label for="note2">Note</label>
                         </div>
                       </div>
                       <div class="switch">
                         <label>
                           Private
-                          <input id="social" type="checkbox">
+                          <input id="social2" type="checkbox">
                           <span class="lever"></span>
                           Public
                         </label>
                       </div>
                     </form>
                   </div>
-                  <a id="pay" class=" waves-effect waves-light deep-orange lighten-2 btn-flat">Pay</a>
-                  <a id="charge" class=" waves-effect waves-light light-green lighten-2 btn-flat">Charge</a>
+                  <a id="pay2" class=" waves-effect waves-light deep-orange lighten-2 btn-flat">Pay</a>
+                  <a id="charge2" class=" waves-effect waves-light light-green lighten-2 btn-flat">Charge</a>
                 </div>
               </div>
             </div>
@@ -267,6 +267,7 @@
             ready: function() {}, // Callback for Modal open
             complete: function() {} // Callback for Modal close
           });
+
           // Pay button clicked
           $('#pay').click(function(event) {
             var user_id = $("#user_id").val();
@@ -288,7 +289,7 @@
               }),
             })
             .done(function() {
-              Materialize.toast('Payment/Charge Successful!', 4000);
+              Materialize.toast('Payment/Charge Successful!', 4000, '.progress-bar-success');
             })
             .fail(function() {
               console.log("error");
@@ -316,7 +317,63 @@
               }),
             })
             .done(function() {
-              Materialize.toast('Payment/Charge Successful!', 4000);
+              Materialize.toast('Payment/Charge Successful!', 4000, '.progress-bar-success');
+            })
+            .fail(function() {
+              console.log("error");
+            })
+          });
+
+          // Pay button clicked
+          $('#pay2').click(function(event) {
+            var user_id = $("#user_id2").val();
+            var note = $("#note2").val();
+            var amount = $("#amount2").val();
+            var date = $("#date2").val();
+            var social = $("#social2").is(":checked");
+            $.ajax({
+              url: '/payment',
+              type: 'POST',
+              dataType: 'json',
+              contentType: "application/json",
+              data: JSON.stringify({
+                user_id: user_id,
+                note: note,
+                amount: amount,
+                date: date,
+                social: social
+              }),
+            })
+            .done(function() {
+              Materialize.toast('Payment/Charge Successful!', 4000, '.progress-bar-success');
+            })
+            .fail(function() {
+              console.log("error");
+            })
+          });
+
+          // Charge button clicked
+          $('#charge2').click(function(event) {
+            var user_id = $("#user_id2").val();
+            var note = $("#note2").val();
+            var amount = $("#amount2").val();
+            var date = $("#date2").val();
+            var social = $("#social2").is(":checked");
+            $.ajax({
+              url: '/payment',
+              type: 'POST',
+              dataType: 'json',
+              contentType: "application/json",
+              data: JSON.stringify({
+                user_id: user_id,
+                note: note,
+                amount: -amount,
+                date: date,
+                social: social
+              }),
+            })
+            .done(function() {
+              Materialize.toast('Payment/Charge Successful!', 4000, '.progress-bar-success');
             })
             .fail(function() {
               console.log("error");
