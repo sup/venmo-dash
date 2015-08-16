@@ -75,8 +75,8 @@
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s3">
-                          <input id="email" type="text" class="validate">
-                          <label for="email">Email</label>
+                          <input id="user_id" type="text" class="validate">
+                          <label for="user_id">User ID</label>
                         </div>
                         <div class="input-field col s3">
                           <input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" />
@@ -122,8 +122,8 @@
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s3">
-                          <input id="email" type="text" class="validate">
-                          <label for="email">Email</label>
+                          <input id="user_id" type="text" class="validate">
+                          <label for="user_id">User ID</label>
                         </div>
                         <div class="input-field col s3">
                           <input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" />
@@ -208,8 +208,8 @@
               <form class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="email" type="text" class="validate">
-                    <label for="email">Email</label>
+                    <input id="user_id" type="text" class="validate">
+                    <label for="user_id">User ID</label>
                   </div>
                 </div>
                 <div class="row">
@@ -269,7 +269,7 @@
           });
           // Pay button clicked
           $('#pay').click(function(event) {
-            var email = $("#email").val();
+            var user_id = $("#user_id").val();
             var note = $("#note").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
@@ -280,7 +280,7 @@
               dataType: 'json',
               contentType: "application/json",
               data: JSON.stringify({
-                email: email,
+                user_id: user_id,
                 note: note,
                 amount: amount,
                 date: date,
@@ -288,7 +288,7 @@
               }),
             })
             .done(function() {
-              console.log("success");
+              Materialize.toast('Payment/Charge Successful!', 4000);
             })
             .fail(function() {
               console.log("error");
@@ -297,7 +297,7 @@
 
           // Charge button clicked
           $('#charge').click(function(event) {
-            var email = $("#email").val();
+            var user_id = $("#user_id").val();
             var note = $("#note").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
@@ -308,7 +308,7 @@
               dataType: 'json',
               contentType: "application/json",
               data: JSON.stringify({
-                email: email,
+                user_id: user_id,
                 note: note,
                 amount: -amount,
                 date: date,
@@ -316,7 +316,7 @@
               }),
             })
             .done(function() {
-              console.log("success");
+              Materialize.toast('Payment/Charge Successful!', 4000);
             })
             .fail(function() {
               console.log("error");
