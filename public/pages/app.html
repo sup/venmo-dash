@@ -65,7 +65,7 @@
       <!-- Main Grid/Row holding friend cards--> 
       <ul id="popout" class="collapsible popout animated zoomIn" data-collapsible="accordion">
         <li>
-          <div class="collapsible-header"><i class="material-icons">payment</i>Schedule Payments and Charges</div>
+          <div id="schedule" class="collapsible-header"><i class="material-icons">payment</i>Schedule Payments and Charges</div>
           <div class="collapsible-body">
             <div id="form-row" class="row">
               <div id="form-col" class="col s12">
@@ -112,7 +112,7 @@
           </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">replay</i>Recurring Payments and Charges</div>
+          <div id="recurring" class="collapsible-header"><i class="material-icons">replay</i>Recurring Payments and Charges</div>
           <div class="collapsible-body">
             <div id="form-row2" class="row">
               <div id="form-col2" class="col s12">
@@ -291,8 +291,7 @@
             .done(function() {
               console.log('success!');
               Materialize.toast('Payment/Charge Successful!', 4000, 'green-background');
-              $('li').removeClass('active');
-              $('collapsible-header').removeClass('active');
+              $('#schedule').click();
 
             })
             .fail(function(e) {
@@ -323,8 +322,7 @@
             .done(function() {
               console.log('success!');
               Materialize.toast('Payment/Charge Successful!', 4000, 'green-background');
-              $('li').removeClass('active');
-              $('collapsible-header').removeClass('active');
+              $('#schedule').click();
             })
             .fail(function(e) {
               console.log(e);
@@ -354,8 +352,7 @@
             .done(function() {
               console.log('success!');
               Materialize.toast('Payment/Charge Successful!', 4000, 'green-background');
-              $('li').removeClass('active');
-              $('collapsible-header').removeClass('active');
+              $('#recurring').click();
 
             })
             .fail(function(e) {
@@ -386,8 +383,7 @@
             .done(function() {
               console.log('success!');
               Materialize.toast('Payment/Charge Successful!', 4000, 'green-background');
-              $('li').removeClass('active');
-              $('collapsible-header').removeClass('active');
+              $('#recurring').click();
 
             })
             .fail(function(e) {
