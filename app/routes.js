@@ -62,7 +62,10 @@ module.exports = function(app, request, async, passport, cron) {
             pay(req.user.access_token, user_id, note, amount, social);  
             res.status(200).send('{}');
         } else {  
-            cron.scheduleJob(date, function(){
+            // Parse date to create date object
+            var datearr = date.split("-");
+            var dateobj = new Date(datearr[0], datearr[1], datearr[2], 00, 00, 00);
+            cron.scheduleJob(dateobj, function(){
                 pay(req.user.access_token, user_id, note, amount, social); 
             });
             res.status(200).send('{}');
