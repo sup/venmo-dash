@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         tagName: 'div',
 
-        template: '<div class="col l4 m6 s12"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile.profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{profile.display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: {{graph.payedPercent}}%"> <span class="sr-only">{{graph.payed}}</span> </div> <div class="progress-bar progress-bar-danger" style="width: {{graph.chargedPercent}}%"> <span class="sr-only">{{graph.charged}}</span> </div> </div><a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a></div></div></div></div>',
+        template: '<div id="{{profile.username}}"class="col l4 m6 s12"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile.profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{profile.display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: {{graph.payedPercent}}%"> <span class="sr-only">{{graph.payed}} $</span> </div> <div class="progress-bar progress-bar-danger" style="width: {{graph.chargedPercent}}%"> <span class="sr-only">{{graph.charged}} $</span> </div> </div><a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a></div></div></div></div>',
 
         initialize: function() {
             this.render();
@@ -20,11 +20,11 @@ $(document).ready(function() {
         },
 
         hide: function() {
-            this.$el.hide();
+            $('#'+this.model.attributes.profile.username).hide();
         },
 
         show: function() {
-            this.$el.show();
+            $('#'+this.model.attributes.profile.username).show();
         }
 
     });
@@ -70,7 +70,14 @@ $(document).ready(function() {
 
         render: function() {
             this.collection.forEach(function(item) {
+                console.log(item);
+                console.log(item.payed + item.charged);
                 var view = new ProfileView({model: item});
+                if (item.attributes.graph.payed || item.attributes.graph.charged) {
+                    console.log("RENDERED");
+                }else {
+                    view.hide();
+                }
             });
         }
     });
