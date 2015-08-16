@@ -111,8 +111,8 @@
               <form class="col s12">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input id="username" type="text" class="validate">
-                    <label for="username">Username</label>
+                    <input id="email" type="text" class="validate">
+                    <label for="email">Email</label>
                   </div>
                 </div>
                 <div class="row">
@@ -172,7 +172,7 @@
           });
           // Pay button clicked
           $('#pay').click(function(event) {
-            var username = $("#username").val();
+            var email = $("#email").val();
             var message = $("#message").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
@@ -183,7 +183,7 @@
               dataType: 'json',
               contentType: "application/json",
               data: JSON.stringify({
-                username: username,
+                email: email,
                 message: message,
                 amount: amount,
                 date: date,
@@ -200,7 +200,7 @@
 
           // Charge button clicked
           $('#charge').click(function(event) {
-            var username = $("#username").val();
+            var email = $("#email").val();
             var message = $("#message").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
@@ -211,7 +211,7 @@
               dataType: 'json',
               contentType: "application/json",
               data: JSON.stringify({
-                username: username,
+                email: email,
                 message: message,
                 amount: -amount,
                 date: date,
