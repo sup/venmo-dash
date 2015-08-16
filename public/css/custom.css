@@ -16,6 +16,10 @@ body {
     font-size: 30px;
 }
 
+#pay {
+    margin-left: 75%;
+}
+
 #card-grid .card-panel .row {
   margin-bottom: 0px;
 }
