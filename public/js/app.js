@@ -38,19 +38,20 @@ $(document).ready(function() {
 
         initialize: function() {
             this.render();
+            var graph_data = this.model.toJSON().graph;
+            new Chartist.Pie('.ct-chart', {
+            series: [graph_data.pay,graph_data.charged],
+            labels: ["Money Paid", "Money Received"],
+            }, {
+                donut: true,
+                donutWidth: 35,
+            });
         },
 
         render: function() {
             // TODO MAKE THIS.MODEL.TOJSON()
             this.$el.append((Mustache.render(this.template, this.model.toJSON())));
             var graph_data = this.model.toJSON().graph;
-            new Chartist.Pie('.ct-chart', {
-            series: [50,50],
-            labels: ["Money Paid", "Money Received"],
-            }, {
-                donut: true,
-                donutWidth: 35,
-            });
             return this;
         },
 
