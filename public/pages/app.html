@@ -106,18 +106,33 @@
           </div>-->
         <div id="payment-modal" class="modal">
           <div class="modal-content">
-            <h4>Username</h4>
-            <p>Info about the user</p>
+            <h4>Payment/Charge</h4>
             <div class="row">
-              <div class="col s4 graph">Graphs?</div>
-              <div class="col s4 graph">Graphs?</div>
-              <div class="col s4 graph">Graphs?</div>
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input id="username" type="text" class="validate">
+                    <label for="username">Username</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Message</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input type="date" class="datepicker">
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Pay</a>
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Charge</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-light grey lighten-3 btn-flat">Exit</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-light deep-orange lighten-3 btn-flat">Pay</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-light light-green lighten-3 btn-flat">Charge</a>
           </div>
         </div>
 
