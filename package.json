@@ -25,6 +25,8 @@
     "mongoose": "^4.1.2",
     "morgan": "^1.6.1",
     "passport": "^0.2.2",
-    "request": "^2.60.0"
+    "request": "^2.60.0",
+    "passport-venmo": "0.0.1",
+    "node-schedule": "~0.2.9"
   }
 }
