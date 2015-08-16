@@ -20,7 +20,7 @@
     <!-- Navigation -->
     <nav>
       <div class="nav-wrapper container">
-        <a href="#" class="brand-logo"><img id="navlogo" src="../assets/venmonavlogo.png" width="163" height="64"></a>
+        <a href="#" class="brand-logo"><img id="navlogo" src="../assets/venmonavlogo2.png" width="145"></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>        
             <div class="input-field">
@@ -30,7 +30,7 @@
               </label>
             </div>
           </li>
-          <li><a href="#!">Schedule Payments</a></li>
+          <li><a class="modal-trigger" href="#payment-modal">Schedule Payments</a></li>
           <li><a href="#!">Something</a></li>
           <li><a href="#!">Else?</a></li>
           <li><a href="/logout">Logout</a></li>
@@ -104,7 +104,22 @@
             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Charge</a>
           </div>
           </div>-->
-
+        <div id="payment-modal" class="modal">
+          <div class="modal-content">
+            <h4>Username</h4>
+            <p>Info about the user</p>
+            <div class="row">
+              <div class="col s4 graph">Graphs?</div>
+              <div class="col s4 graph">Graphs?</div>
+              <div class="col s4 graph">Graphs?</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Exit</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Pay</a>
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Charge</a>
+          </div>
+        </div>
 
       </div>
 
