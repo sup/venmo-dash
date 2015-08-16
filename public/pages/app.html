@@ -117,19 +117,19 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <textarea id="message" class="materialize-textarea"></textarea>
                     <label for="textarea1">Message</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <input type="date" class="datepicker">
+                    <input id="date" type="date" class="datepicker">
                   </div>
                 </div>
                 <div class="switch">
                   <label>
                     Private
-                    <input type="checkbox">
+                    <input id="public" type="checkbox">
                     <span class="lever"></span>
                     Public
                   </label>
@@ -166,12 +166,62 @@
           });
           // Pay button clicked
           $('#pay').click(function(event) {
-            
+            var username = $("#username").val();
+            var message = $("#message").val();
+            var date = $("#date").val();
+            var public = $("#public").is(":checked");
+            $.ajax({
+              url: '/payment',
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                username: username,
+                message: message,
+                date: date,
+                public: public,
+                pay: true,
+                charge: false
+              },
+            })
+            .done(function() {
+              console.log("success");
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+            });
           });
 
           // Charge button clicked
           $('#charge').click(function(event) {
-            
+            var username = $("#username").val();
+            var message = $("#message").val();
+            var date = $("#date").val();
+            var public = $("#public").is(":checked");
+            $.ajax({
+              url: '/payment',
+              type: 'POST',
+              dataType: 'json',
+              data: {
+                username: username,
+                message: message,
+                date: date,
+                public: public,
+                pay: false,
+                charge: true
+              },
+            })
+            .done(function() {
+              console.log("success");
+            })
+            .fail(function() {
+              console.log("error");
+            })
+            .always(function() {
+              console.log("complete");
+            });
           });
       });
     </script>
