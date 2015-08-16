@@ -8,6 +8,24 @@ $(document).ready(function() {
         }
     });
 
+    var ModalView = Backbone.View.extend({
+
+        el: $('#main-view-anchor'),
+
+        tagName: 'div',
+
+        template: '<ul id="popout" class="collapsible popout animated zoomIn" data-collapsible="accordion"><li><div class="collapsible-header"><i class="material-icons">payment</i>Schedule Payments and Charges</div><div class="collapsible-body"><div id="form-row" class="row"><div id="form-col" class="col s12"><div class="card-panel"><h5>Scheduled Payment/Charge</h5><div class="row"><form class="col s12"><div class="row"><div class="input-field col s3"><input id="email" type="text" class="validate"><label for="email">Email</label></div><div class="input-field col s3"><input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" /><label for="amount">Amount</label></div><div class="input-field col s3"><input id="date" type="date" class="datepicker"></div><div class="input-field col s3"><input id="time" type="text"><label for="time">Time</label></div><div class="input-field col s12"><input id="note" type="text" class="validate"><label for="note">Note</label></div></div><div class="switch"><label>Private<input id="social" type="checkbox"><span class="lever"></span>Public</label></div></form></div><a id="pay" class=" waves-effect waves-light deep-orange lighten-2 btn-flat">Pay</a><a id="charge" class=" waves-effect waves-light light-green lighten-2 btn-flat">Charge</a></div></div></div></div></li><li><div class="collapsible-header"><i class="material-icons">replay</i>Recurring Payments and Charges</div><div class="collapsible-body"><div id="form-row" class="row"><div id="form-col" class="col s12"><div class="card-panel"><h5>Recurring Payment/Charge</h5><div class="row"><form class="col s12"><div class="row"><div class="input-field col s3"><input id="email" type="text" class="validate"><label for="email">Email</label></div><div class="input-field col s3"><input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" /><label for="amount">Amount</label></div><div class="input-field col s3"><input id="date" type="date" class="datepicker"></div><div class="input-field col s3"><input id="time" type="text"><label for="time">Time</label></div><div class="input-field col s12"><input id="note" type="text" class="validate"><label for="note">Note</label></div></div><div class="switch"><label>Private<input id="social" type="checkbox"><span class="lever"></span>Public</label></div></form></div><a id="pay" class=" waves-effect waves-light deep-orange lighten-2 btn-flat">Pay</a><a id="charge" class=" waves-effect waves-light light-green lighten-2 btn-flat">Charge</a></div></div></div></div></li></ul>',
+
+        initialize: function() {
+            this.render();
+        },
+
+        render: function() {
+            this.$el.append(this.template);
+        }
+   
+    });
+
     var ProfileView = Backbone.View.extend({
 
         el: $('#card-grid'),
@@ -108,17 +126,12 @@ $(document).ready(function() {
         },
 
         filter: function() {
-            console.log("MADE IT TO FILTER");
             var inputValue = this.inputVal.toLowerCase();
-            console.log("INPUTVAL= "+inputValue);
             this.viewCollection.forEach(function(item) {
                 var username = item.model.attributes.profile.display_name.toLowerCase();
-                console.log(username);
                 if(username.indexOf(inputValue) > -1 || username.length === 0) {
                     item.show();
-                    console.log("SHOW");
                 } else {
-                    console.log("HIDE");
                     item.hide();
                 }
             });
@@ -131,12 +144,11 @@ $(document).ready(function() {
         url: "/profile"
     })
     .done(function(body) {
-        console.log("BEFORE THE BODY");
         var MainCard = new ProfileCard(body);
         var MainCardView = new MainView({model: MainCard});
         // Update graph with graph data
-        console.log(body);
-        
+        //var modalView = new ModalView({model: {}});
+
         $.ajax({
             type: "GET",
             url: "/friends"
