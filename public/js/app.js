@@ -2,6 +2,12 @@ $(document).ready(function() {
 
     var ProfileCard = Backbone.Model.extend({});
 
+    var InputModel = Backbone.Model.extend({
+        initialize: function() {
+            console.log(this);
+        }
+    });
+
     var ProfileView = Backbone.View.extend({
 
         el: $('#card-grid'),
@@ -66,17 +72,54 @@ $(document).ready(function() {
     var profileCollection = new ProfileCollection();
 
     ProfileCollectionView = Backbone.View.extend({
+        
         collection: null,
 
+        viewCollection: null,
+
+        el: 'body',
+
+        bindings: {
+            '#search': 'inputVal'
+        },
+
+        initialize: function() {
+            this.model = new InputModel({});
+            this.listenTo(this.model, {
+                'change:inputVal': this.updateText
+            });
+            this.inputVal = $('#search').val();
+            this.stickit();
+        },
+
+        updateText: function(e) {
+            console.log("updatedText");
+            this.inputVal = $('#search').val();
+            this.filter();
+        },
+
         render: function() {
+            var viewCollection = [];
             this.collection.forEach(function(item) {
-                console.log(item);
-                console.log(item.payed + item.charged);
                 var view = new ProfileView({model: item});
-                if (item.attributes.graph.payed || item.attributes.graph.charged) {
-                    console.log("RENDERED");
-                }else {
-                    view.hide();
+                viewCollection.push(view);
+            });
+            this.viewCollection = viewCollection;
+        },
+
+        filter: function() {
+            console.log("MADE IT TO FILTER");
+            var inputValue = this.inputVal.toLowerCase();
+            console.log("INPUTVAL= "+inputValue);
+            this.viewCollection.forEach(function(item) {
+                var username = item.model.attributes.profile.display_name.toLowerCase();
+                console.log(username);
+                if(username.indexOf(inputValue) > -1 || username.length === 0) {
+                    item.show();
+                    console.log("SHOW");
+                } else {
+                    console.log("HIDE");
+                    item.hide();
                 }
             });
         }
