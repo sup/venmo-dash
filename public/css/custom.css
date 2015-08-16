@@ -2,6 +2,10 @@ body {
     background-image: url('../assets/graph.png');
 }
 
+.green-background {
+  background-color: #C7F464;
+}
+
 .collapsible-header:hover {
   color: grey;
 }
