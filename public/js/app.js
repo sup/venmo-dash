@@ -86,27 +86,26 @@ $(document).ready(function() {
         var MainCardView = new MainView({model: MainCard});
         // Update graph with graph data
         console.log(body);
+        $.ajax({
+            type: "GET",
+            url: "/friends"
+        })
+        .done(function(body) {
+            var data = body.data;
+            for(var i in data) {
+                var profileCard = new ProfileCard(data[i]);
+                profileCollection.add(profileCard);
+            }
+            console.log(profileCollection);
+            var profileCollectionView = new ProfileCollectionView({collection: profileCollection});
+            profileCollectionView.render();
+        })
+        .fail(function() {
+            console.log("FAILED");
+        });
     })
     .fail(function() {
         console.log("PROFILE FAILED");
-    });
-
-    $.ajax({
-        type: "GET",
-        url: "/friends"
-    })
-    .done(function(body) {
-        var data = body.data;
-        for(var i in data) {
-            var profileCard = new ProfileCard(data[i]);
-            profileCollection.add(profileCard);
-        }
-        console.log(profileCollection);
-        var profileCollectionView = new ProfileCollectionView({collection: profileCollection});
-        profileCollectionView.render();
-    })
-    .fail(function() {
-        console.log("FAILED");
     });
 
 });

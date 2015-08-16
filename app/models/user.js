@@ -18,7 +18,7 @@ var userSchema = mongoose.Schema({
     refresh_token: String,
     uid: String,
     profilePic: String,
-    dateJoined: String 
+    dateJoined: String
 });
 
 module.exports = mongoose.model('User', userSchema);

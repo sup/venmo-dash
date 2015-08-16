@@ -31,9 +31,10 @@ module.exports = function(app, request, async, passport) {
     });
 
     app.get('/friends', isLoggedIn, function(req, res) {
-        getFriendsList(req.user.uid, req.user.access_token, function(error, resData) {
-            console.log("RES DATA= "  +resData);
-            res.send(resData);
+        getFriendsList(req.user.uid, req.user.access_token, function(error, friendsList) {
+            getPayHistoryFriendsList(req.user.access_token, friendsList, function(error, newFriendsList) {
+                res.send(newFriendsList);
+            });
         });
     });
 
@@ -69,22 +70,51 @@ module.exports = function(app, request, async, passport) {
         });
     };
 
-    function paymentFriendsList(userToken, friendsList, callback) {
-        var venmoUrl ='https://api.venmo.com/v1/payments?access_token='+userToken;
+    function getPayHistoryFriendsList(userToken, friendsList, callback) {
+        var venmoUrl ='https://api.venmo.com/v1/payments?access_token='+userToken+'&limit=1000';
         var options = {
             url: venmoUrl
         };
+        var newFriendsList = [];
+        
         request.get(options, function(error, response, body) {
             if(!error) {
                 var bodyData = JSON.parse(body);
-                for(var i in bodyData) {
-                    for (var z in bodyData) {
-
+                for(var i in friendsList.data) {
+                    var friendPayed = 0;
+                    var friendCharged = 0;
+                    var friend = friendsList.data[i];
+                    console.log("FRIEND= "+ JSON.stringify(friend));
+                    console.log("FRIEND USERNAME= "+friend.username);
+                    for (var z in bodyData.data) {
+                        if(bodyData.data[z].status === "settled" || bodyData.data[z].status === "pending") {
+                            if (bodyData.data[z].action === "pay") {
+                                if (bodyData.data[z].target.user.username === friend.username) {
+                                    friendCharged += bodyData.data[z].amount;
+                                } else if (bodyData.data[z].actor.username === friend.username) {
+                                    friendPayed += bodyData.data[z].amount;
+                                }
+                            } else if (bodyData.data[z].action === "charge") {
+                                if (bodyData.data[z].target.user.username === friend.username) {
+                                    friendPayed += bodyData.data[z].amount;
+                                } else if (bodyData.data[z].actor.username === friend.username) {
+                                    friendCharged += bodyData.data[z].amount;
+                                }
+                            } 
+                        }
                     }
+                    var friend = {
+                        profile: friend,
+                        graph: {
+                            payed: friendPayed,
+                            charged: friendCharged
+                        }
+                    };
+                    newFriendsList.push(friend);
                 }
+                callback(error, newFriendsList);
             }
         });
-
     };
 
     function payHistory(userToken, username, callback) {
@@ -103,9 +133,6 @@ module.exports = function(app, request, async, passport) {
                 console.log("BODY COUNT="+bodyData.data.count);
                 for(var i in bodyData.data) {
                     if(bodyData.data[i].status === "settled" || bodyData.data[i].status === "pending") {
-                        if (bodyData.data[i].status === "pending") {
-                            console.log(bodyData.data[i]);
-                        }
                         if (bodyData.data[i].action === "pay") {
                             if (bodyData.data[i].actor.username != username) {
                                 charged += bodyData.data[i].amount;
