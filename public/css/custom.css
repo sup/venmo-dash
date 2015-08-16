@@ -6,12 +6,20 @@ body {
   margin-left: 75%;
 }
 
+.collapsible-body {
+  background-color: white;
+}
+
 .username {
   margin-top: 0px;
 }
 
 #card-grid .card-panel .row {
   margin-bottom: 0px;
+}
+
+.card-panel {
+  box-shadow: none;
 }
 
 #maincardcontent {
