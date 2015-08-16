@@ -135,7 +135,7 @@
                 <div class="switch">
                   <label>
                     Private
-                    <input id="public" type="checkbox">
+                    <input id="social" type="checkbox">
                     <span class="lever"></span>
                     Public
                   </label>
@@ -176,7 +176,7 @@
             var message = $("#message").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
-            var public = $("#public").is(":checked");
+            var social = $("#social").is(":checked");
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -186,7 +186,7 @@
                 message: message,
                 amount: amount,
                 date: date,
-                public: public,
+                social: social,
                 pay: true,
                 charge: false
               },
@@ -202,7 +202,7 @@
             var message = $("#message").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
-            var public = $("#public").is(":checked");
+            var social = $("#social").is(":checked");
             $.ajax({
               url: '/payment',
               type: 'POST',
@@ -212,7 +212,7 @@
                 message: message,
                 amount: amount,
                 date: date,
-                public: public,
+                social: social,
                 pay: false,
                 charge: true
               },
