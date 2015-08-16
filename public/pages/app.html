@@ -123,6 +123,12 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
+                    <input id="amount" type="number" min="0.01" step="0.01" max="2500" value="" />
+                    <label for="amount">Amount</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s12">
                     <input id="date" type="date" class="datepicker">
                   </div>
                 </div>
@@ -168,6 +174,7 @@
           $('#pay').click(function(event) {
             var username = $("#username").val();
             var message = $("#message").val();
+            var amount = $("#amount").val();
             var date = $("#date").val();
             var public = $("#public").is(":checked");
             $.ajax({
@@ -177,6 +184,7 @@
               data: {
                 username: username,
                 message: message,
+                amount: amount,
                 date: date,
                 public: public,
                 pay: true,
@@ -192,6 +200,7 @@
           $('#charge').click(function(event) {
             var username = $("#username").val();
             var message = $("#message").val();
+            var amount = $("#amount").val();
             var date = $("#date").val();
             var public = $("#public").is(":checked");
             $.ajax({
@@ -201,6 +210,7 @@
               data: {
                 username: username,
                 message: message,
+                amount: amount,
                 date: date,
                 public: public,
                 pay: false,
