@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         tagName: 'div',
 
-        template: '<div id="{{profile.username}}"class="col l4 m6 s12"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile.profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{profile.display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: {{graph.payedPercent}}%"> <span class="sr-only">{{graph.payed}} $</span> </div> <div class="progress-bar progress-bar-danger" style="width: {{graph.chargedPercent}}%"> <span class="sr-only">{{graph.charged}} $</span> </div> </div><a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a></div></div></div></div>',
+        template: '<div id="{{profile.username}}"class="col l4 m6 s12 animated zoomIn"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile.profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{profile.display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: {{graph.payedPercent}}%"> <span class="sr-only">{{graph.payed}} $</span> </div> <div class="progress-bar progress-bar-danger" style="width: {{graph.chargedPercent}}%"> <span class="sr-only">{{graph.charged}} $</span> </div> </div></div></div></div></div>',
 
         initialize: function() {
             this.render();
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
         el: $('#main-view-anchor'),
 
-        template: '<div id="maincard" class="col s12"> <div class="card-panel"> <div id="maincardcontent" class="row content"> <div class="col s3 avatar-div"> <img src="http://communications.iu.edu/img/photos/people/placeholder.jpg" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{profile.venmo.display_name}}</h3> <div class="email">{{profile.email}}</div> <div class="balance">Current Balance: <span class="green-font">{{profile.balance}}</span></div> <div class="graph">graph?</div> </div> <div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
+        template: '<div id="maincard" class="col s12 animated zoomIn"> <div class="card-panel"> <div id="maincardcontent" class="row content"> <div class="col s3 avatar-div"> <img src="http://communications.iu.edu/img/photos/people/placeholder.jpg" alt="" class="avatar responsive-img"> </div> <div class="col s5 info"> <h3 class="username">{{profile.venmo.display_name}}</h3> <div class="email">{{profile.email}}</div><div class="balance"><span class="green-font">${{profile.balance}}</span></div> <div class="highlights">graph?</div></div><div class="col s4"> <div id="my-graph" class="ct-chart ct-perfect-fourth"></div> </div> </div> </div> </div>',
 
         initialize: function() {
             console.log(this.model);

@@ -2,16 +2,26 @@ body {
     background-image: url('../assets/graph.png');
 }
 
-#pay {
-  margin-left: 75%;
+#maincard .username {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 32px;
+}
+
+.email {
+    color: #99a7a7;
 }
 
 .collapsible-body {
   background-color: white;
 }
 
-.username {
-  margin-top: 0px;
+.balance {
+    font-size: 30px;
+}
+
+#pay {
+    margin-left: 75%;
 }
 
 #card-grid .card-panel .row {
