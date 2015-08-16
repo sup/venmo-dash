@@ -117,8 +117,8 @@
                 </div>
                 <div class="row">
                   <div class="input-field col s12">
-                    <textarea id="message" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Message</label>
+                    <textarea id="note" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Note</label>
                   </div>
                 </div>
                 <div class="row">
@@ -173,7 +173,7 @@
           // Pay button clicked
           $('#pay').click(function(event) {
             var email = $("#email").val();
-            var message = $("#message").val();
+            var note = $("#note").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
             var social = $("#social").is(":checked");
@@ -184,7 +184,7 @@
               contentType: "application/json",
               data: JSON.stringify({
                 email: email,
-                message: message,
+                note: note,
                 amount: amount,
                 date: date,
                 social: social
@@ -201,7 +201,7 @@
           // Charge button clicked
           $('#charge').click(function(event) {
             var email = $("#email").val();
-            var message = $("#message").val();
+            var note = $("#note").val();
             var amount = $("#amount").val();
             var date = $("#date").val();
             var social = $("#social").is(":checked");
@@ -212,7 +212,7 @@
               contentType: "application/json",
               data: JSON.stringify({
                 email: email,
-                message: message,
+                note: note,
                 amount: -amount,
                 date: date,
                 social: social
