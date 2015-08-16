@@ -1,4 +1,4 @@
-module.exports = function(app, request, async, passport) {
+module.exports = function(app, request, async, passport, cron) {
 
     app.get('/', isLoggedIn, function(req, res) {
         res.sendfile('public/pages/app.html');
@@ -39,17 +39,50 @@ module.exports = function(app, request, async, passport) {
     });
 
     app.get('/profile', isLoggedIn, function(req, res) {
-        console.log("profile route hit");
         payHistory(req.user.access_token, req.user.username, function(error, data) {
             var user = req.user;
             var profileData = {
                 profile: user,
                 graph: data
             };
-            console.log("User profile returning "+profileData);
             res.send(profileData);
         });
     });
+
+    app.post('/payment', isLoggedIn, function(req, res) {
+        var body = req.body;
+        console.log("PAYMENT BODY="+req.body);
+        var username = body.username;
+        var message = body.message; 
+        var amount= body.amount;
+        var date = body.date;
+        var social = body.social;
+
+        if (!date) {
+            pay(req.user.access_token, username, message, amount, social);  
+            res.status(200);
+        }     
+       
+        cron.scheduleJob(date, function(){
+            pay(req.user.access_token, username, message, amount, social); 
+            res.status(200); 
+        }); 
+
+    });
+
+    function pay(userToken, userId, message, amount, social) {
+        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'userId='+userId+'&message='+message+'&amount='+amount+'&audience='+social; 
+
+        var options = {
+            url: venmoUrl
+        };
+        console.log("Payment URL "+venmoUrl);
+        request.get(options, function(error, response, body) {
+            if (!error) {
+                console.log("PAYMENT"+body);
+            };
+        });
+    };
 
 
     function getFriendsList(userId, userToken, callback) {
