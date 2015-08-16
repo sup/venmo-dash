@@ -2,6 +2,14 @@ body {
     background-image: url('../assets/graph.png');
 }
 
+.sr-only {
+	font-size: 15px;
+}
+
+.ct-label {
+	font-size: 15px;
+}
+
 .green-background {
   background-color: #C7F464;
 }

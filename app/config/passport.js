@@ -22,7 +22,7 @@ module.exports = function(passport) {
     passport.use(new VenmoStrategy({
         clientID: VENMO_CLIENT_ID,
         clientSecret: VENMO_CLIENT_SECRET,
-        callbackURL: "http://76f094b1.ngrok.com/auth/venmo/callback"
+        callbackURL: "http://venmo-dash.me/auth/venmo/callback"
         }, function(accessToken, refreshToken, venmo, done) {
             console.log("Trying to find User");
             User.findOne({
