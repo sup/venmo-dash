@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         tagName: 'div',
 
-        template: '<div class="col l4 m6 s12"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: 90%"> <span class="sr-only">$90</span> </div> <div class="progress-bar progress-bar-danger" style="width: 10%"> <span class="sr-only">$10</span> </div> </div><a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a></div></div></div></div>',
+        template: '<div class="col l4 m6 s12"><div class="card-panel"><div class="row content"><div class="col s3 avatar"><img src="{{profile.profile_picture_url}}" alt="" class="circle responsive-img"></div><div class="col s9 info"><div class="username">{{profile.display_name}}</div><div class="progress"> <div class="progress-bar progress-bar-success" style="width: {{graph.payedPercent}}%"> <span class="sr-only">{{graph.payed}}</span> </div> <div class="progress-bar progress-bar-danger" style="width: {{graph.chargedPercent}}%"> <span class="sr-only">{{graph.charged}}</span> </div> </div><a class="modal-trigger waves-effect waves-light  btn light-blue lighten-3" href="#modal1">Details</a></div></div></div></div>',
 
         initialize: function() {
             this.render();
@@ -86,12 +86,14 @@ $(document).ready(function() {
         var MainCardView = new MainView({model: MainCard});
         // Update graph with graph data
         console.log(body);
+        
         $.ajax({
             type: "GET",
             url: "/friends"
         })
         .done(function(body) {
-            var data = body.data;
+            var data = body;
+            console.log(body);
             for(var i in data) {
                 var profileCard = new ProfileCard(data[i]);
                 profileCollection.add(profileCard);

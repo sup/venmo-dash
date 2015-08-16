@@ -107,7 +107,9 @@ module.exports = function(app, request, async, passport) {
                         profile: friend,
                         graph: {
                             payed: friendPayed,
-                            charged: friendCharged
+                            charged: friendCharged,
+                            payedPercent: friendPayed / (friendCharged + friendPayed) * 100,
+                            chargedPercent: friendCharged / (friendCharged + friendPayed) * 100
                         }
                     };
                     newFriendsList.push(friend);
