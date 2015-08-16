@@ -14,6 +14,7 @@ body {
 
 .email {
     color: #99a7a7;
+    font-size: 22px;
 }
 
 .collapsible-body {
@@ -21,7 +22,7 @@ body {
 }
 
 .balance {
-    font-size: 30px;
+    font-size: 55px;
 }
 
 #pay {
