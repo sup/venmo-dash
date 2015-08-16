@@ -52,25 +52,25 @@ module.exports = function(app, request, async, passport, cron) {
     app.post('/payment', isLoggedIn, function(req, res) {
         var body = req.body;
         console.log("PAYMENT BODY="+JSON.stringify(req.body));
-        var email = body.email;
+        var user_id = body.user_id;
         var note = body.note; 
         var amount= body.amount;
         var date = body.date;
         var social = body.social ? 'public' : 'private';
 
         if (!date) {
-            pay(req.user.access_token, email, note, amount, social);  
+            pay(req.user.access_token, user_id, note, amount, social);  
             res.status(200);
         } else {  
             cron.scheduleJob(date, function(){
-                pay(req.user.access_token, email, note, amount, social); 
+                pay(req.user.access_token, user_id, note, amount, social); 
                 res.status(200); 
             }); 
         }
     });
 
-    function pay(userToken, email, note, amount, social) {
-        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&email='+email+'&note='+note+'&amount='+amount+'&audience='+social; 
+    function pay(userToken, user_id, note, amount, social) {
+        var venmoUrl = 'https://api.venmo.com/v1/payments?access_token='+userToken+'&email='+user_id+'&note='+note+'&amount='+amount+'&audience='+social; 
 
         var options = {
             url: venmoUrl

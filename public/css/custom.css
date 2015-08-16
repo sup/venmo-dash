@@ -6,6 +6,18 @@ body {
   color: grey;
 }
 
+.username {
+    font-size: 18px;
+}
+
+.user_id {
+    color: #99a7a7;
+}
+
+.progress {
+    margin-bottom: 0px;
+}
+
 #maincard .username {
     margin-top: 0px;
     margin-bottom: 0px;
